@@ -1,0 +1,28 @@
+[package]
+name = "c2pa_bridge"
+version = "0.1.0"
+edition = "2021"
+description = "TrueLens C2PA JNI bridge — connects Rust c2pa-rs to Android hardware-backed signing"
+
+# Build as a shared library (.so) for Android
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+# JNI bindings for Rust ↔ Kotlin communication
+jni = { version = "0.21", features = ["invocation"] }
+
+# C2PA content provenance library
+# Uncomment when ready to integrate:
+# c2pa = "0.36"
+
+# Logging
+# log = "0.4"
+# android_logger = "0.14"
+
+[profile.release]
+# Optimize for size — important for mobile .so files
+opt-level = "s"
+lto = true
+strip = true
+codegen-units = 1
